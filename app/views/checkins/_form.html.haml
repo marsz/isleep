@@ -1,0 +1,10 @@
+= simple_form_for Checkin.new, :method => :post, :url => checkins_path, :html => { :class => 'form-horizontal' } do |f|
+  %fieldset
+    .control-group
+      %label.control-label="狀態"
+      .controls= checkin_type_select f
+    .control-group
+      %label.control-label="(現在)時間"
+      .controls= f.input_field :created_at, :class => 'input-mini'
+    .control-group
+      .controls= f.submit "記錄", :class => 'btn-large'

@@ -1,0 +1,14 @@
+!!!
+%html
+  %head
+    %title iSleep
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+  .head
+    = render :partial => "head"
+  .container
+    .top_fix.visible-desktop
+    = render :partial => "falshes"
+    = yield

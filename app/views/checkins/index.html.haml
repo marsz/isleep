@@ -1,0 +1,15 @@
+.row-fluid
+  .span10
+    = render :partial => 'form'
+    
+  .span10
+    %table.table.table-striped
+      %tr
+        %th="日期"
+        %th="起床"
+        %th="睡覺"
+      - checkins_dates(@checkins).each do |date|
+        %tr
+          %td=date
+          %td=checkins_pick_time(@checkins, :date => date, :check_type => :wakeup)
+          %td=checkins_pick_time(@checkins, :date => date, :check_type => :sleep)

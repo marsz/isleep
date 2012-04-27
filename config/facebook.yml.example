@@ -1,0 +1,15 @@
+development:
+  :domain: ""
+  :app_id: ""
+  :api_secret: ""
+  :namespace: ""
+test:
+  :domain: ""
+  :app_id: ""
+  :api_secret: ""
+  :namespace: ""
+production:
+  :domain: ""
+  :app_id: ""
+  :api_secret: ""
+  :namespace: ""

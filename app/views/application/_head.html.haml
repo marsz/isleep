@@ -1,0 +1,21 @@
+.topbar.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar{ :data => { :toggle => :collapse, :target => '.nav-collapse' } }
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to "愛睡覺+_+", root_path, :class => :brand
+      .nav-collapse.collapse
+        %ul.nav
+          - if user_signed_in?
+            - c = { params[:check_type].to_s.to_sym => :active }
+            - Checkin::TYPES.each do |type_value, type_name|
+              %li{ :class => c[type_value] }
+                =link_to type_name, checkins_path(:check_type => type_value)
+        %ul.nav.pull-right
+          %li
+            - if user_signed_in?
+              = link_to "登出 #{current_user.name}", user_logout_path, :method => :delete, :confirm => "請確定"
+            - else
+              = link_to 'Facebook登入', '/auth/facebook'
