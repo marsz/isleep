@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Checkin < ActiveRecord::Base
-  TYPES = { :wakeup => '起床', :sleep => '睡覺' }
+  TYPES = { :wakeup => '剛起床', :sleep => '要睡覺' }
   TYPE_COLLECTION = TYPES.map
   
   belongs_to :user
