@@ -2,7 +2,7 @@ $:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory
 require "rvm/capistrano"
 
 require 'capistrano/ext/multistage'
-require "whenever/capistrano"
+# require "whenever/capistrano"
 require 'bundler/capistrano'
 
 begin

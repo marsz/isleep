@@ -1,6 +1,7 @@
 module CheckinsHelper
   
   def checkins_dates(checkins)
+    return [] if checkins.size == 0
     values = checkins.map(&:date)
     (values.min..values.max).map(&:to_s).reverse
   end
