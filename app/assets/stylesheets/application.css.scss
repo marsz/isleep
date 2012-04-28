@@ -17,9 +17,15 @@
   height: 0px;
 }
 
+@media (min-width: 900px) {
+  .checkin {
+    .close {
+      visibility: hidden;
+    }
+  }  
+}
 .checkin {
   .close {
     float: none;
-    visibility: hidden;
   }
 }
