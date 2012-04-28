@@ -7,3 +7,18 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+
+$(document).ready(function(){
+  $('[data-type=hover]').each(function(){
+    var show = $(this).attr('data-show');
+    var el = this;
+    if(show) {
+      $(el).on('mouseover', function(){
+        $(show, el).css('visibility', 'visible');
+      });
+      $(el).on('mouseout', function(){
+        $(show, el).css('visibility', 'hidden');
+      });
+    }
+  });
+});

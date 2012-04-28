@@ -1,0 +1,3 @@
+.checkin{ :data => { :type => :hover, :show => '.close' }}
+  %span= checkin.time
+  = link_to 'x', checkin_path(checkin), :method => :delete, :confirm => '請確定', :class => :close

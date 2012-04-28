@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Checkin < ActiveRecord::Base
-  TYPES = { :wakeup => '剛起床', :sleep => '要睡覺' }
+  TYPES = { :sleep => '要睡覺', :wakeup => '剛起床' }
   TYPE_COLLECTION = TYPES.map
   
   belongs_to :user
@@ -8,12 +8,15 @@ class Checkin < ActiveRecord::Base
   validates_presence_of :check_type
   validates_presence_of :date
   validates_inclusion_of :check_type, :in => TYPES.keys.concat(TYPES.keys.map(&:to_s))
-  validates_uniqueness_of :check_type, :scope => [:user_id, :date]
 
   before_validation :sync_date
   
   def self.human_attribute_name(attr, opts = {})
     attr.to_sym == :check_type ? '' : super
+  end
+  
+  def time
+    created_at.strftime("%k:%M")
   end
   
   private 

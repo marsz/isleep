@@ -6,10 +6,12 @@
     %table.table.table-striped
       %tr
         %th="日期"
-        %th="起床"
-        %th="睡覺"
+        - Checkin::TYPES.each do |k, v|
+          %th=v
       - checkins_dates(@checkins).each do |date|
         %tr
           %td=date
-          %td=checkins_pick_time(@checkins, :date => date, :check_type => :wakeup)
-          %td=checkins_pick_time(@checkins, :date => date, :check_type => :sleep)
+          - Checkin::TYPES.each do |k, v|
+            %td
+              - checkins_pick(@checkins, :date => date, :check_type => k).reverse.each do |ck|
+                = render :partial => 'checkin', :object => ck

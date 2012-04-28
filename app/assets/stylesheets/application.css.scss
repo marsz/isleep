@@ -16,3 +16,10 @@
 .nav-collapse.collapse {
   height: 0px;
 }
+
+.checkin {
+  .close {
+    float: none;
+    visibility: hidden;
+  }
+}
