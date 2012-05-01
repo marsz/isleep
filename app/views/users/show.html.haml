@@ -1,0 +1,24 @@
+%h1=@user.name
+%ul.thumbnails
+  %li
+    .thumbnail
+      = image_tag @user.avatar_url
+
+.row
+  %h3.span1="HP"
+  .value.span6
+    %b.span1="#{@user.hp} / #{max_exp(@user.hp)}"
+    .progress.progress-danger.progress-striped.active.span2
+      .bar{ :style => "width: #{current_exp(@user.hp)*100/max_exp(@user.hp)}%" }
+    %b.span1="Level #{level(@user.hp)}"
+    .clearfix
+
+
+.row
+  %h3.span1="SP"
+  .value.span6
+    %b.span1="#{@user.sp} / #{max_exp(@user.sp)}"
+    .progress.progress-striped.active.span2
+      .bar{ :style => "width: #{current_exp(@user.sp)*100/max_exp(@user.sp)}%" }
+    %b.span1="Level #{level(@user.sp)}"
+    .clearfix

@@ -28,4 +28,20 @@ class User < ActiveRecord::Base
     :wakeup
   end
   
+  def render_sleep_target
+    sleep_target.strftime("%k:%M") if sleep_target
+  end
+  
+  def render_wakeup_target
+    wakeup_target.strftime("%k:%M") if wakeup_target
+  end
+
+  def facebook_id
+    authorizations.where(:provider => :facebook).first.uid
+  end
+  
+  def avatar_url
+    "http://graph.facebook.com/" + facebook_id + "/picture?type=large"
+  end
+  
 end
