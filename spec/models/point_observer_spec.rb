@@ -34,7 +34,7 @@ describe PointObserver do
 
       checks = @user.checkins.create(:check_type => :wakeup, :created_at => @wakeup_time - 5.hours)
       @user.reload
-      @user.hp.should == -6
+      @user.hp.should == -7
     end
   
     it "plus" do
