@@ -3,8 +3,9 @@ require 'spec_helper'
 describe PointObserver do
   
   before do
-    @user = FactoryGirl.create :user, :sleep_target => Time.now.beginning_of_day, :wakeup_target => Time.now.beginning_of_day+7.hours
-    @time = @user.sleep_target
+    @user = FactoryGirl.create :user, :sleep_target => '00:00', :wakeup_target => '07:00'
+    @user.reload
+    @time = Time.zone.parse(Date.today.to_s+" "+@user.sleep_target.to_s[11..15])
   end
   
   describe "sleep" do
@@ -29,7 +30,7 @@ describe PointObserver do
     it "minus" do
       checks = @user.checkins.create(:check_type => :wakeup, :created_at => @wakeup_time + 2.hours)
       @user.reload
-      @user.hp.should == -2
+      @user.hp.should == -3
 
       checks = @user.checkins.create(:check_type => :wakeup, :created_at => @wakeup_time - 5.hours)
       @user.reload

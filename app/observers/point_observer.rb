@@ -26,7 +26,7 @@ class PointObserver < ActiveRecord::Observer
     return 0 unless target_time
     opts[:bias_early] ||= 1.hour
     opts[:bias_late] ||= 1.hour
-    target = target_time.change :year => created_at.year, :month => created_at.month, :day => created_at.day
+    target = Time.zone.parse(target_time.to_s[11..15]).change :year => created_at.year, :month => created_at.month, :day => created_at.day
     target = target + 1.day if target - created_at < -12.hours
     target = target - 1.day if target - created_at > 12.hours
     from = target - opts[:bias_early]
