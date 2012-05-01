@@ -1,0 +1,11 @@
+= simple_form_for @user, :url => user_path(@user), :method => :put, :html => { :class => 'form-horizontal' } do |f|
+  %fieldset
+    .control-group
+      %label.control-label="目標睡覺時間"
+      .controls= f.input_field :sleep_target, :class => 'input-mini', :include_blank => true
+    .control-group
+      %label.control-label="目標起床時間"
+      .controls= f.input_field :wakeup_target, :class => 'input-mini', :include_blank => true
+    .control-group
+      .controls= f.submit "儲存", :class => 'btn-large'  
+  

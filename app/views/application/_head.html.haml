@@ -13,9 +13,14 @@
             - Checkin::TYPES.each do |type_value, type_name|
               %li{ :class => c[type_value] }
                 =link_to type_name, checkins_path(:check_type => type_value)
+            %li{ :class => params[:action] == 'show' && params[:controller] == 'users' ? :active : '' }
+              =link_to current_user.name, user_path(current_user)
         %ul.nav.pull-right
-          %li
-            - if user_signed_in?
-              = link_to "登出 #{current_user.name}", user_logout_path, :method => :delete, :confirm => "請確定"
-            - else
+          - if user_signed_in?
+            %li
+              = link_to "設定", edit_user_path(current_user)
+            %li
+              = link_to "登出", user_logout_path, :method => :delete, :confirm => "請確定"
+          - else
+            %li
               = link_to 'Facebook登入', '/auth/facebook'

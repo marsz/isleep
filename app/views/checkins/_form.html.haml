@@ -2,7 +2,7 @@
   %fieldset
     .control-group
       %label.control-label="目前狀態"
-      .controls= checkin_type_select f
+      .controls= checkin_type_select f, :user => current_user
     .control-group
       %label.control-label="(現在)時間"
       .controls= f.input_field :created_at, :class => 'input-mini'
