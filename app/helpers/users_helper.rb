@@ -16,10 +16,10 @@ module UsersHelper
   
   def lv_exp(value)
     lv = 0
-    base = 50
+    base = 10
     return [1, base] if value <= 0
     exp = base
-    while value > exp
+    while value >= exp
       lv += 1
       exp = exp + (lv * base)
     end
