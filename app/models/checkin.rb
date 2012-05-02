@@ -11,6 +11,8 @@ class Checkin < ActiveRecord::Base
 
   before_validation :sync_date
   
+  serialize :point_log, ActiveSupport::HashWithIndifferentAccess
+  
   def self.human_attribute_name(attr, opts = {})
     attr.to_sym == :check_type ? '' : super
   end

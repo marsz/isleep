@@ -14,19 +14,39 @@ class PointObserver < ActiveRecord::Observer
     count_hp checkin
   end
   
+  def after_destroy(checkin)
+    rollback_point checkin
+  end
+  
   private
+  
+  def rollback_point(checkin)
+    if checkin.point_log.key?(:offset)
+      offset = checkin.point_log[:offset]
+      col = { :sleep => :sp, :wakeup => :hp }[checkin.check_type.to_sym]
+      User.update_counters checkin.user_id, col => offset * -1
+    end
+  end
   
   def count_sp(checkin)
     if checkin.check_type.to_s == 'sleep'
       offset = count_point_offset(checkin.created_at, checkin.user.sleep_target, SP_MAX_INCREASE, SP_MAX_DECREASE, :bias_early => SP_BIAS_EARLY.hours, :bias_late => SP_BIAS_LATE.hours)
-      User.update_counters checkin.user_id, :sp => offset if offset != 0
+      if offset != 0
+        User.update_counters checkin.user_id, :sp => offset 
+        point_log = { :target => checkin.user.sleep_target, :offset => offset }
+        checkin.update_attribute :point_log, point_log
+      end
     end
   end
 
   def count_hp(checkin)
     if checkin.check_type.to_s == 'wakeup'
       offset = count_point_offset(checkin.created_at, checkin.user.wakeup_target, HP_MAX_INCREASE, HP_MAX_DECREASE, :bias_early => HP_BIAS_EARLY.hours, :bias_late => HP_BIAS_LATE.hours)
-      User.update_counters checkin.user_id, :hp => offset if offset != 0
+      if offset != 0
+        User.update_counters checkin.user_id, :hp => offset 
+        point_log = { :target => checkin.user.wakeup_target, :offset => offset }
+        checkin.update_attribute :point_log, point_log
+      end
     end
   end
   

@@ -10,15 +10,21 @@ describe PointObserver do
   
   describe "sleep" do
     it "minus" do
-      checks = @user.checkins.create(:check_type => :sleep, :created_at => @time-5.hour)
+      check = @user.checkins.create(:check_type => :sleep, :created_at => @time-5.hour)
       @user.reload
       @user.sp.should == -8
+      check.destroy
+      @user.reload
+      @user.sp.should == 0
     end
   
     it "plus" do
-      checks = @user.checkins.create(:check_type => :sleep, :created_at => @time+0.5.hour)
+      check = @user.checkins.create(:check_type => :sleep, :created_at => @time+0.5.hour)
       @user.reload
       @user.sp.should == 3
+      check.destroy
+      @user.reload
+      @user.sp.should == 0
     end
   end
 
@@ -28,19 +34,28 @@ describe PointObserver do
     end
   
     it "minus" do
-      checks = @user.checkins.create(:check_type => :wakeup, :created_at => @wakeup_time + 2.hours)
+      check1 = @user.checkins.create(:check_type => :wakeup, :created_at => @wakeup_time + 2.hours)
       @user.reload
       @user.hp.should == -3
 
-      checks = @user.checkins.create(:check_type => :wakeup, :created_at => @wakeup_time - 5.hours)
+      check2 = @user.checkins.create(:check_type => :wakeup, :created_at => @wakeup_time - 5.hours)
       @user.reload
       @user.hp.should == -7
+
+      check1.destroy
+      check2.destroy
+      @user.reload
+      @user.hp.should == 0
     end
   
     it "plus" do
-      checks = @user.checkins.create(:check_type => :wakeup, :created_at => @wakeup_time - 2.hours)
+      check = @user.checkins.create(:check_type => :wakeup, :created_at => @wakeup_time - 2.hours)
       @user.reload
       @user.hp.should == 5
+
+      check.destroy
+      @user.reload
+      @user.hp.should == 0
     end
   end
 
