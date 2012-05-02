@@ -1,6 +1,6 @@
 # Additional translations at https://github.com/plataformatec/devise/wiki/I18n
 
-zh-TW:
+zh_TW:
   devise:
     confirmations:
       confirmed: "帳號已確認成功. 你已經登入了."
