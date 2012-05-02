@@ -8,6 +8,7 @@ zh_TW:
         resend_confirmation: "重送確認步驟"
       send_instructions: "幾分鐘內你會收到一封說明如何確認帳號的信件."
     failure:
+      already_authenticated: '你已經登入。'
       inactive: "你的帳號尚未開通。"
       invalid: "用戶名稱或密碼有誤。"
       invalid_token: "認證信物無效。"
