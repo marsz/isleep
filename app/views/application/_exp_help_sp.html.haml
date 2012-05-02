@@ -1,0 +1,9 @@
+%h5="SP 計算方式"
+%ul
+  %li
+    = link_to "設定", edit_user_path(current_user)
+    =" 你的目標睡覺時間"
+  %li
+    =raw "於目標睡覺時間前 #{code_font(SP_BIAS_EARLY)} 小時以及後 #{code_font SP_BIAS_LATE} 小時內進行睡覺打卡, 即可得 #{code_font SP_MAX_INCREASE} 點經驗值, 假設睡覺時間定於晚上 11  點, 則於 #{11-SP_BIAS_EARLY} ~ #{11+SP_BIAS_LATE} 點間打卡即可獲得經驗值"
+  %li
+    =raw "於上述範圍以外時間打卡睡覺時, 以 #{code_font '30'} 分鐘為單位, 差距時間內每 30 分鐘則扣 #{code_font '1'} 點經驗值, 最多不扣超過 #{code_font SP_MAX_DECREASE.abs} 點經驗值, 例如 23  點的睡覺時間, 若於凌晨 1 點打卡則會扣 2  點經驗值"

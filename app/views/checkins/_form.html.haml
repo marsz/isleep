@@ -1,6 +1,11 @@
 = simple_form_for Checkin.new, :method => :post, :url => checkins_path, :html => { :class => 'form-horizontal' } do |f|
   %fieldset
     .control-group
+      %label.control-label="經驗值"
+      .controls
+        - [:hp, :sp].each do |p|
+          = render :partial => 'point', :locals => { :value => current_user.send(p), :name => p }
+    .control-group
       %label.control-label="目前狀態"
       .controls= checkin_type_select f, :user => current_user
     .control-group
@@ -8,3 +13,4 @@
       .controls= f.input_field :created_at, :class => 'input-mini'
     .control-group
       .controls= f.submit "打卡記錄", :class => 'btn-large'
+      

@@ -1,3 +1,11 @@
+HP_BIAS_EARLY = 3
+HP_BIAS_LATE = 0.5
+HP_MAX_INCREASE = 5
+HP_MAX_DECREASE = -10
+SP_BIAS_EARLY = 1
+SP_BIAS_LATE = 1
+SP_MAX_INCREASE = 3
+SP_MAX_DECREASE = -8
 class PointObserver < ActiveRecord::Observer
   observe :checkin
   
@@ -10,14 +18,14 @@ class PointObserver < ActiveRecord::Observer
   
   def count_sp(checkin)
     if checkin.check_type.to_s == 'sleep'
-      offset = count_point_offset(checkin.created_at, checkin.user.sleep_target, 3, -8)
+      offset = count_point_offset(checkin.created_at, checkin.user.sleep_target, SP_MAX_INCREASE, SP_MAX_DECREASE, :bias_early => SP_BIAS_EARLY.hours, :bias_late => SP_BIAS_LATE.hours)
       User.update_counters checkin.user_id, :sp => offset if offset != 0
     end
   end
 
   def count_hp(checkin)
     if checkin.check_type.to_s == 'wakeup'
-      offset = count_point_offset(checkin.created_at, checkin.user.wakeup_target, 5, -10, :bias_early => 3.hours, :bias_late => 0.5.hours)
+      offset = count_point_offset(checkin.created_at, checkin.user.wakeup_target, HP_MAX_INCREASE, HP_MAX_DECREASE, :bias_early => HP_BIAS_EARLY.hours, :bias_late => HP_BIAS_LATE.hours)
       User.update_counters checkin.user_id, :hp => offset if offset != 0
     end
   end

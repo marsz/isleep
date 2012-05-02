@@ -1,0 +1,9 @@
+%h5="HP 計算方式"
+%ul
+  %li
+    = link_to "設定", edit_user_path(current_user)
+    =" 你的目標起床時間"
+  %li
+    =raw "於目標起床時間前 #{code_font(HP_BIAS_EARLY)} 小時以及目標起床時間後 #{code_font HP_BIAS_LATE} 小時(彈性)進行起床打卡, 即可得 #{code_font HP_MAX_INCREASE} 點經驗值, 假設起床時間定於早上 7 點, 則 7 點半以前打卡即可獲得經驗值"
+  %li
+    =raw "於目標起床時間後 #{code_font HP_BIAS_LATE} 小時以後打卡時, 以 #{code_font '30'} 分鐘為單位, 每晚 30 分鐘則扣 #{code_font '1'} 點經驗值, 最多不扣超過 #{code_font HP_MAX_DECREASE.abs} 點經驗值, 例如 7 點的目標起床時間, 若於 9 點打卡則會扣 3 點經驗值"

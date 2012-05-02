@@ -9,6 +9,11 @@
 //= require bootstrap
 
 $(document).ready(function(){
+  $('.modal').each(function(){
+    $(this).modal({
+      show:false
+    });
+  });
   $('[data-type=hover]').each(function(){
     var show = $(this).attr('data-show');
     var el = this;

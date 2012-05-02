@@ -1,0 +1,20 @@
+- name = name.to_s
+- bt_classes = { 'hp' => 'btn-danger', 'sp' => 'btn-primary' }
+%a.btn{ :data => { :toggle => :modal }, :href => "##{name}", :class => bt_classes[name] }
+  = "#{name.upcase} #{value}"
+.modal.hide{ :id => name }
+  .modal-header
+    %button.close{ :data => { :dismiss => :modal } }='x'
+    %h2
+      = name.upcase
+  .modal-body
+    %h4
+      = "等級:"
+      %span.badge.badge-inverse=level(value)
+      ="經驗值: "
+      %span.badge.badge-warning=value
+      =" / "
+      %span.badge.badge-success=max_exp(value)
+    %p
+    = render :partial => 'bar', :locals => { :value => value, :value_type => name }
+    = render :partial => "exp_help_#{name}"

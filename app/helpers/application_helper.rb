@@ -19,5 +19,8 @@ module ApplicationHelper
     end
     raw strs.join("\n")
   end
-    
+  
+  def code_font(text, opts = {})
+    raw content_tag(:code, text)
+  end
 end

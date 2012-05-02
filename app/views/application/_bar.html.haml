@@ -1,0 +1,2 @@
+.progress.progress-striped.active{ :class => local_assigns[:value_type].to_s == 'hp' ? "progress-danger" : ''}
+  .bar{ :style => "width: #{current_exp(value)*100/max_exp(value)}%"}
