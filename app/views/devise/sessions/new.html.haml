@@ -1,2 +1,10 @@
 = bt_login
+
+%p
+
+.well
+  - hp = render :partial => 'point', :locals => { :value => nil, :name => :hp }
+  - sp = render :partial => 'point', :locals => { :value => nil, :name => :sp }
+  = raw "愛睡覺是一款用於#{code_font " 記錄個人睡覺與起床時間"} 的線上服務, 可透過設定進行目標管理, 站內提供 #{hp}  #{sp} 數值作為目標達成率的衡量指標"
+  
   

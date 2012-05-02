@@ -1,7 +1,10 @@
 %h5="SP 計算方式"
 %ul
   %li
-    = link_to "設定", edit_user_path(current_user)
+    - if current_user
+      = link_to "設定", edit_user_path(current_user)
+    - else
+      = '設定'
     =" 你的目標睡覺時間"
   %li
     =raw "於目標睡覺時間前 #{code_font(SP_BIAS_EARLY)} 小時以及後 #{code_font SP_BIAS_LATE} 小時內進行睡覺打卡, 即可得 #{code_font SP_MAX_INCREASE} 點經驗值, 假設睡覺時間定於晚上 11  點, 則於 #{11-SP_BIAS_EARLY} ~ #{11+SP_BIAS_LATE} 點間打卡即可獲得經驗值"
